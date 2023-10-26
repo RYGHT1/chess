@@ -51,16 +51,13 @@ public class ChessBoard extends JPanel implements KeyListener, MouseMotionListen
             for (int x = 0; x < 8; x++) {
                 if (dragging && piece_map[y][x] == dragged) {
                     g2d.drawImage(dragged.icon.getImage(), piece_loc.x, piece_loc.y, square_size, square_size, null);
-                } else {
-                    if (piece_map[y][x] != null && piece_map[y][x].visible && piece_map[y][x].icon != null) {
-                        g2d.drawImage(piece_map[y][x].icon.getImage(), square_size * x, square_size * y, square_size, square_size, null);
-                    }
                 }
+                if (piece_map[y][x] != null && piece_map[y][x].visible && piece_map[y][x].icon != null && piece_map[y][x] != dragged) {
+                    g2d.drawImage(piece_map[y][x].icon.getImage(), square_size * x, square_size * y, square_size, square_size, null);
+                }
+
             }
         }
-    }
-
-    private void drawPieces(Piece piece, int x, int y, boolean isDragged) {
     }
 
     @Override
@@ -138,7 +135,6 @@ public class ChessBoard extends JPanel implements KeyListener, MouseMotionListen
         }
         repaint();
         //TODO handle case where new location == old location (piece disappears)
-
 
 
 //        if (dragged != null) {
